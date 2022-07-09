@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://logic/paddle.gd" type="Script" id=1]
 [ext_resource path="res://paddle.png" type="Texture" id=2]
@@ -6,10 +6,11 @@
 [ext_resource path="res://logic/ball.gd" type="Script" id=4]
 [ext_resource path="res://ball.png" type="Texture" id=5]
 [ext_resource path="res://separator.png" type="Texture" id=6]
-[ext_resource path="res://logic/wall.gd" type="Script" id=7]
+[ext_resource path="res://logic/wall_left.gd" type="Script" id=7]
 [ext_resource path="res://logic/ceiling_floor.gd" type="Script" id=8]
 [ext_resource path="res://assets/1.PNG" type="Texture" id=9]
-[ext_resource path="res://score2.gd" type="Script" id=10]
+[ext_resource path="res://logic/score_right.gd" type="Script" id=10]
+[ext_resource path="res://logic/score_left.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 16 )
@@ -72,6 +73,11 @@ texture = ExtResource( 6 )
 position = Vector2( -10, 200 )
 script = ExtResource( 7 )
 
+[node name="score" type="Sprite" parent="LeftWall"]
+position = Vector2( 390, -171 )
+texture = ExtResource( 9 )
+script = ExtResource( 10 )
+
 [node name="Collision" type="CollisionShape2D" parent="LeftWall"]
 position = Vector2( 42, 0 )
 shape = SubResource( 3 )
@@ -79,6 +85,12 @@ shape = SubResource( 3 )
 [node name="RightWall" type="Area2D" parent="."]
 position = Vector2( 650, 200 )
 script = ExtResource( 7 )
+
+[node name="score" type="Sprite" parent="RightWall"]
+position = Vector2( -365, -172 )
+texture = ExtResource( 3 )
+normal_map = ExtResource( 3 )
+script = ExtResource( 11 )
 
 [node name="Collision" type="CollisionShape2D" parent="RightWall"]
 position = Vector2( -43, -2 )
@@ -106,19 +118,6 @@ current = true
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-
-[node name="score2" type="Sprite" parent="."]
-position = Vector2( 380, 29 )
-texture = ExtResource( 9 )
-script = ExtResource( 10 )
-
-[node name="LeftScore" type="Area2D" parent="."]
-position = Vector2( 231, 23 )
-
-[node name="Sprite" type="Sprite" parent="LeftScore"]
-position = Vector2( 54, 5 )
-texture = ExtResource( 3 )
-normal_map = ExtResource( 3 )
 
 [connection signal="area_entered" from="Left" to="Left" method="_on_area_entered"]
 [connection signal="area_entered" from="Right" to="Right" method="_on_area_entered"]
